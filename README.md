@@ -1,5 +1,61 @@
-# docker
-## Docker run 命令  
+# docker 常用命令
+## Docker version 命令  
+
+docker version :显示 Docker 版本信息。  
+
+**语法**
+>docker version [OPTIONS]  
+
+**OPTIONS说明：**
+-f :指定返回值的模板文件。  
+
+**实例** <br>
+显示 Docker 版本信息。  
+
+>$ docker version <br>
+>Client: <br>
+>>Version:      1.7.1 <br>
+ API version:  1.19 <br>
+ Go version:   go1.4.2 <br>
+ Git commit:   0a8c2e3/1.7.1 <br>
+ OS/Arch:      linux/amd64 <br>  
+
+>Server: <br>
+>>Version:      1.7.1 <br>
+ API version:  1.19 <br>
+ Go version:   go1.4.2 <br>
+ Git commit:   0a8c2e3/1.7.1 <br>
+ OS/Arch:      linux/amd64 <br>
+
+## Docker info 命令  
+
+docker info : 显示 Docker 系统信息，包括镜像和容器数。  
+
+**语法**
+>docker info [OPTIONS]  
+
+**实例**<br>
+查看docker系统信息。
+>$ docker info <br>
+Containers: 2 <br>
+Images: 12 <br>
+Storage Driver: devicemapper <br>
+ Pool Name: docker-253:3-2359672-pool <br>
+ Pool Blocksize: 65.54 kB <br>
+ Backing Filesystem: extfs <br>
+ Data file: /dev/loop0 <br>
+ Metadata file: /dev/loop1 <br>
+ Library Version: 1.02.117-RHEL6 (2016-12-13) <br>
+Execution Driver: native-0.2 <br>
+Logging Driver: json-file <br>
+Kernel Version: 3.10.105-1.el6.elrepo.x86_64 <br>
+Operating System: centos 6 <br>
+CPUs: 4 <br>
+Total Memory: 5.196 GiB <br>
+Name: panxiang <br>
+ID: ZM5K:TXHR:JX2J:2HT5:23PV:TFU2:SV7H:7Z5P:S6DH:ZWZ7:MZCZ:CKKX
+
+## Docker run 命令
 
 docker run ：创建一个新的容器并运行一个命令 <br>  
 
@@ -34,5 +90,64 @@ docker run ：创建一个新的容器并运行一个命令 <br>
 >docker run -p 80:80 -v /data:/data -d nginx:latest <br>  
 
 使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。 <br>
->runoob@runoob:~$ docker run -it nginx:latest /bin/bash <br>
->root@b8573233d675:/# <br>
+>panxiang@panxiang:~$ docker run -it nginx:latest /bin/bash <br>
+>root@b8573233d675:/#   
+
+## Docker create 命令  
+
+**docker create** ：创建一个新的容器但不启动它  
+
+**语法**
+>docker create [OPTIONS] IMAGE [COMMAND] [ARG...]  
+
+语法同 docker run  
+
+**实例**<br>
+使用docker镜像nginx:latest创建一个容器,并将容器命名为myrunoob <br>
+>panxiang@panxiang:~$ docker create  --name myrunoob  nginx:latest     
+>09b93464c2f75b7b69f83d56a9cfc23ceb50a48a9db7652ee4c27e3e2cb1961f  
+
+## Docker exec 命令  
+
+**docker exec** ：在运行的容器中执行命令  
+
+**语法**
+>docker exec [OPTIONS] CONTAINER COMMAND [ARG...]  
+
+OPTIONS说明：
+* -d :分离模式: 在后台运行
+* -i :即使没有附加也保持STDIN 打开
+* -t :分配一个伪终端  
+
+**实例** <br>
+在容器mynginx中以交互模式执行容器内/root/runoob.sh脚本 <br>
+>panxiang@panxiang:~$ docker exec -it mynginx /bin/sh /root/runoob.sh  
+>http://www.baidu.com/  
+
+在容器mynginx中开启一个交互模式的终端<br>
+>panxiang@panxiang:~$ docker exec -i -t  mynginx /bin/bash  
+>root@b1a0703e41e7:/#
+
+
+## Docker start/stop/restart 命令  
+
+**docker start** :启动一个或多少已经被停止的容器  
+
+**docker stop** :停止一个运行中的容器  
+
+**docker restart** :重启容器  
+
+**语法**
+>docker start [OPTIONS] CONTAINER [CONTAINER...] <br>
+>docker stop [OPTIONS] CONTAINER [CONTAINER...] <br>
+>docker restart [OPTIONS] CONTAINER [CONTAINER...] <br> 
+
+**实例** <br>
+启动已被停止的容器myrunoob <br>
+>docker start myrunoob  
+
+停止运行中的容器myrunoob <br>
+>docker stop myrunoob  
+
+重启容器myrunoob <br>
+>docker restart myrunoob
