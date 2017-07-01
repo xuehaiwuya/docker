@@ -103,8 +103,8 @@ docker run ：创建一个新的容器并运行一个命令 <br>
 语法同 docker run  
 
 **实例**<br>
-使用docker镜像nginx:latest创建一个容器,并将容器命名为myrunoob <br>
->panxiang@panxiang:~$ docker create  --name myrunoob  nginx:latest     
+使用docker镜像nginx:latest创建一个容器,并将容器命名为mynginx <br>
+>panxiang@panxiang:~$ docker create  --name mynginx  nginx:latest     
 >09b93464c2f75b7b69f83d56a9cfc23ceb50a48a9db7652ee4c27e3e2cb1961f  
 
 ## Docker exec 命令  
@@ -120,8 +120,8 @@ OPTIONS说明：
 * -t :分配一个伪终端  
 
 **实例** <br>
-在容器mynginx中以交互模式执行容器内/root/runoob.sh脚本 <br>
->panxiang@panxiang:~$ docker exec -it mynginx /bin/sh /root/runoob.sh  
+在容器mynginx中以交互模式执行容器内/root/baidu.sh脚本 <br>
+>panxiang@panxiang:~$ docker exec -it mynginx /bin/sh /root/baidu.sh  
 >http://www.baidu.com/  
 
 在容器mynginx中开启一个交互模式的终端<br>
@@ -143,11 +143,49 @@ OPTIONS说明：
 >docker restart [OPTIONS] CONTAINER [CONTAINER...] <br> 
 
 **实例** <br>
-启动已被停止的容器myrunoob <br>
->docker start myrunoob  
+启动已被停止的容器mynginx <br>
+>docker start mynginx  
 
-停止运行中的容器myrunoob <br>
->docker stop myrunoob  
+停止运行中的容器mynginx <br>
+>docker stop mynginx  
 
-重启容器myrunoob <br>
->docker restart myrunoob
+重启容器mynginx <br>
+>docker restart mynginx  
+
+## Docker kill 命令  
+
+**docker kill** :杀掉一个运行中的容器。  
+
+**语法**
+>docker kill [OPTIONS] CONTAINER [CONTAINER...]  
+
+**OPTIONS说明：**
+* -s :向容器发送一个信号  
+
+**实例**<br>
+杀掉运行中的容器mynginx <br>
+>panxiang@panxiang:~$ docker kill -s KILL mynginx  
+>mynginx  
+
+## Docker rm 命令  
+
+**docker rm** ：删除一个或多少容器  
+
+**语法**
+>docker rm [OPTIONS] CONTAINER [CONTAINER...]  
+
+**OPTIONS说明：**
+* -f :通过SIGKILL信号强制删除一个运行中的容器
+* -l :移除容器间的网络连接，而非容器本身
+* -v :-v 删除与容器关联的卷  
+
+**实例** <br>
+强制删除容器db01、db02 <br>
+>docker rm -f db01、db02  
+
+移除容器nginx01对容器db01的连接，连接名db <br>
+>docker rm -l db  
+
+删除容器nginx01,并删除容器挂载的数据卷 <br>
+>docker rm -v nginx01
+
