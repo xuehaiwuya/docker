@@ -1,8 +1,11 @@
 # docker
-## Docker run 命令
-docker run ：创建一个新的容器并运行一个命令 <br>
+## Docker run 命令  
+
+docker run ：创建一个新的容器并运行一个命令 <br>  
+
 **语法** <br>
-docker run [OPTIONS] IMAGE [COMMAND] [ARG...] <br>
+>docker run [OPTIONS] IMAGE [COMMAND] [ARG...] <br>  
+
 **PTIONS说明：** <br>
 * -a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项； <br>
 * -d: 后台运行容器，并返回容器ID； <br>
